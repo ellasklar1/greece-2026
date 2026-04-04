@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greece 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Cormorant Garamond', 'Georgia', 'Times New Roman', serif;
+            color: #2c2c2c;
+            background: #faf9f7;
+            line-height: 1.6;
+        }
+
+        /* Nav Tabs */
+        .tab-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: #faf9f7;
+            border-bottom: 1px solid #e0ddd8;
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            padding: 0;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .tab-nav button {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #8a8580;
+            background: none;
+            border: none;
+            padding: 16px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .tab-nav button:hover {
+            color: #5c5650;
+        }
+
+        .tab-nav button.active {
+            color: #6b7f6b;
+            border-bottom-color: #6b7f6b;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 80px 24px 50px;
+            background: #faf9f7;
+        }
+
+        .hero-label {
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-size: 11px;
+            font-weight: 400;
+            color: #8a8580;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(52px, 10vw, 80px);
+            font-weight: 300;
+            color: #2c2c2c;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+            font-style: italic;
+        }
+
+        .hero .dates {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            color: #8a8580;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+        }
+
+        .hero .islands {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            color: #6b7f6b;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* Sections */
+        .tab-inner {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 50px 24px 60px;
+        }
+
+        h2 {
+            font-size: 36px;
+            font-weight: 400;
+            margin-bottom: 8px;
+            color: #2c2c2c;
+            font-style: italic;
+        }
+
+        .section-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            color: #8a8580;
+            margin-bottom: 32px;
+            letter-spacing: 0.5px;
+        }
+
+        p {
+            color: #5c5650;
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+
+        a { color: #6b7f6b; }
+
+        /* Overview Cards */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 16px;
+            margin-top: 28px;
+        }
+
+        .overview-card {
+            background: #fff;
+            border: 1px solid #e8e5e0;
+            padding: 28px 20px;
+            text-align: center;
+        }
+
+        .overview-card .number {
+            font-size: 36px;
+            font-weight: 300;
+            color: #6b7f6b;
+            font-style: italic;
+        }
+
+        .overview-card .label {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            color: #8a8580;
+            margin-top: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        /* Itinerary */
+        .itinerary-item {
+            display: flex;
+            gap: 24px;
+            padding: 22px 0;
+            border-bottom: 1px solid #ece9e4;
+        }
+
+        .itinerary-item:last-child { border-bottom: none; }
+
+        .itin-date {
+            min-width: 70px;
+            text-align: center;
+        }
+
+        .itin-date .day-num {
+            font-size: 32px;
+            font-weight: 300;
+            color: #6b7f6b;
+            line-height: 1;
+            font-style: italic;
+        }
+
+        .itin-date .day-name {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            color: #8a8580;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 4px;
+        }
+
+        .itin-content h3 {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 4px;
+            color: #2c2c2c;
+        }
+
+        .itin-content p {
+            font-size: 16px;
+            color: #8a8580;
+            margin-bottom: 0;
+        }
+
+        .itin-tag {
+            font-family: 'Inter', sans-serif;
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 3px 10px;
+            margin-bottom: 8px;
+            margin-right: 4px;
+        }
+
+        .tag-travel { background: #f0ece6; color: #8a7e72; }
+        .tag-paros { background: #e8ede8; color: #5a6e5a; }
+        .tag-milos { background: #eae7ef; color: #6e5f7a; }
+        .tag-athens { background: #f0e8e6; color: #7a5f5a; }
+
+        /* Villa Gallery */
+        .villa-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin: 28px 0;
+        }
+
+        .villa-gallery .gallery-hero {
+            grid-column: 1 / -1;
+            height: 360px;
+        }
+
+        .villa-gallery img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .villa-gallery .gallery-hero img {
+            height: 360px;
+        }
+
+        /* Accommodation Cards */
+        .accom-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 28px;
+        }
+
+        .accom-card {
+            border: 1px solid #e8e5e0;
+            background: #fff;
+            padding: 28px;
+        }
+
+        .accom-card h3 {
+            font-size: 22px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .accom-card .location {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            color: #6b7f6b;
+            margin-bottom: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .accom-card .detail {
+            font-size: 16px;
+            color: #8a8580;
+            margin-bottom: 4px;
+        }
+
+        .status-confirmed {
+            font-family: 'Inter', sans-serif;
+            display: inline-block;
+            background: #e8ede8;
+            color: #4a6a4a;
+            font-size: 10px;
+            font-weight: 500;
+            padding: 3px 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+
+        .status-tbd {
+            font-family: 'Inter', sans-serif;
+            display: inline-block;
+            background: #f0ece6;
+            color: #8a7e72;
+            font-size: 10px;
+            font-weight: 500;
+            padding: 3px 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+
+        /* Cost Table */
+        .cost-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 24px;
+            font-size: 17px;
+        }
+
+        .cost-table th {
+            font-family: 'Inter', sans-serif;
+            text-align: left;
+            padding: 12px 16px;
+            border-bottom: 2px solid #d9d5cf;
+            font-weight: 500;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #8a8580;
+        }
+
+        .cost-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #ece9e4;
+        }
+
+        .cost-table .category-header td {
+            font-weight: 600;
+            font-size: 15px;
+            color: #2c2c2c;
+            padding-top: 24px;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .cost-table .total-row td {
+            font-weight: 600;
+            font-size: 22px;
+            border-top: 2px solid #2c2c2c;
+            border-bottom: none;
+            padding-top: 16px;
+        }
+
+        .cost-table .item-name { color: #5c5650; }
+        .cost-table .amount {
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+        }
+
+        .cost-table .total-row .amount {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .cost-note {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            color: #8a8580;
+            font-style: italic;
+            margin-top: 20px;
+            line-height: 1.7;
+        }
+
+        /* Flight Info */
+        .flight-card {
+            background: #fff;
+            border: 1px solid #e8e5e0;
+            padding: 28px;
+            margin-bottom: 16px;
+        }
+
+        .flight-card .flight-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #8a8580;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        .flight-route {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .flight-city { text-align: center; }
+
+        .flight-city .code {
+            font-size: 36px;
+            font-weight: 300;
+            color: #2c2c2c;
+            font-style: italic;
+        }
+
+        .flight-city .time {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            color: #5c5650;
+        }
+
+        .flight-city .date {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            color: #8a8580;
+        }
+
+        .flight-arrow {
+            color: #6b7f6b;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .flight-airline {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            color: #8a8580;
+            margin-top: 14px;
+        }
+
+        /* Payment */
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 28px;
+        }
+
+        .payment-card {
+            border: 1px solid #e8e5e0;
+            background: #fff;
+            padding: 28px;
+        }
+
+        .payment-card h3 {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .payment-card p {
+            font-size: 16px;
+            color: #8a8580;
+            margin-bottom: 0;
+        }
+
+        /* FAQ */
+        .faq-item {
+            padding: 22px 0;
+            border-bottom: 1px solid #ece9e4;
+        }
+
+        .faq-item:last-child { border-bottom: none; }
+
+        .faq-item h3 {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .faq-item p, .faq-item ul {
+            font-size: 16px;
+            color: #8a8580;
+        }
+
+        .faq-item ul {
+            margin-left: 20px;
+            margin-top: 8px;
+        }
+
+        .faq-item li { margin-bottom: 6px; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 24px;
+            color: #b5b0aa;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            letter-spacing: 1px;
+            border-top: 1px solid #ece9e4;
+        }
+
+        /* Mobile */
+        @media (max-width: 640px) {
+            .hero { padding: 50px 20px 36px; }
+            .tab-inner { padding: 36px 20px 48px; }
+            .tab-nav button { padding: 14px 14px; font-size: 10px; }
+            .flight-route { flex-direction: column; gap: 8px; }
+            .itinerary-item { flex-direction: column; gap: 8px; }
+            .itin-date { text-align: left; display: flex; align-items: center; gap: 10px; }
+            .villa-gallery { grid-template-columns: 1fr 1fr; }
+            .villa-gallery .gallery-hero { height: 240px; }
+            .villa-gallery .gallery-hero img { height: 240px; }
+            .villa-gallery img { height: 160px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero -->
+    <div class="hero">
+        <div class="hero-label">Graduation Trip</div>
+        <h1>Greece 2026</h1>
+        <div class="dates">June 1 &ndash; 10, 2026</div>
+        <div class="islands">Athens &middot; Paros &middot; Milos</div>
+    </div>
+
+    <!-- Tab Navigation -->
+    <nav class="tab-nav">
+        <button class="active" onclick="showTab('overview')">Overview</button>
+        <button onclick="showTab('itinerary')">Itinerary</button>
+        <button onclick="showTab('accommodations')">Stay</button>
+        <button onclick="showTab('flights')">Flights</button>
+        <button onclick="showTab('costs')">Costs</button>
+        <button onclick="showTab('payment')">Payment</button>
+        <button onclick="showTab('faq')">Info</button>
+    </nav>
+
+    <!-- Overview Tab -->
+    <div id="overview" class="tab-content active">
+        <div class="tab-inner">
+            <h2>The Trip</h2>
+            <p class="section-subtitle">Ten days, three islands, one last adventure.</p>
+            <p>Island-hopping through Greece to celebrate graduation. We start in Athens, spend four nights at a private villa estate in Paros, ferry to Milos for three nights, then fly back to Athens for one last night before heading home.</p>
+
+            <div class="overview-grid">
+                <div class="overview-card">
+                    <div class="number">10</div>
+                    <div class="label">Days</div>
+                </div>
+                <div class="overview-card">
+                    <div class="number">3</div>
+                    <div class="label">Destinations</div>
+                </div>
+                <div class="overview-card">
+                    <div class="number">18</div>
+                    <div class="label">People</div>
+                </div>
+                <div class="overview-card">
+                    <div class="number">$3,300</div>
+                    <div class="label">Est. Per Person</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Itinerary Tab -->
+    <div id="itinerary" class="tab-content">
+        <div class="tab-inner">
+            <h2>Day by Day</h2>
+            <p class="section-subtitle">A loose plan &mdash; leaving room for spontaneity.</p>
+
+            <div class="itinerary-item">
+                <div class="itin-date">
+                    <div class="day-num">1</div>
+                    <div class="day-name">Sun</div>
+                </div>
+                <div class="itin-content">
+                    <span class="itin-tag tag-travel">Travel</span>
+                    <h3>Newark &rarr; Athens</h3>
+                    <p>Depart Newark 3:50 PM (United). Overnight flight.</p>
+                </div>
+            </div>
+
+            <div class="itinerary-item">
+                <div class="itin-date">
+                    <div class="day-num">2</div>
+                    <div class="day-name">Mon</div>
+                </div>
+                <div class="itin-content">
+                    <span class="itin-tag tag-athens">Athens</span>
+                    <span class="itin-tag tag-paros">Paros</span>
+                    <h3>Arrive Athens &rarr; Fly to Paros</h3>
+                    <p>Land 8:10 AM. Fly to Paros and settle into the villa.</p>
+                </div>
+            </div>
+
+            <div class="itinerary-item">
+                <div class="itin-date">
+                    <div class="day-num">3</div>
+                    <div class="day-name">Tue</div>
+                </div>
+                <div class="itin-content">
+                    <span class="itin-tag tag-paros">Paros</span>
+                    <h3>Beach Day</h3>
+                    <p>Chill at the villa or hit the beach. First full day on the island.</p>
+                </div>
+            </div>
+
+            <div class="itinerary-item">
+                <div class="itin-date">
+                    <div class="day-num">4</div>
+                    <div class="day-name">Wed</div>
+                </div>
+                <div class="itin-content">
+                    <span class="itin-tag tag-paros">Paros</span>
+                    <h3>Antiparos Day Trip</h3>
+                    <p>Quick 7-minute ferry to the neighboring island of Antiparos.</p>
+                </div>
+            </div>
+
+            <div class="itinerary-item">
+                <div class="itin-date">
+                    <div class="day-num">5</div>
+                    <div class="day-name">Thu</div>
+                </div>
+                <div class="itin-content">
+                    <span class="itin-tag tag-paros">Paros</span>
+                    <h3>Explore Paros</h3>
+                    <p>Last full day on the island. Villages, beaches, and local spots.</p>
+                </div>
+            </div>
+
+            <div class="itinerary-item">
+                <div class="itin-date">
+                    <div class="day-num">6</div>
+                    <div class="day-name">Fri</div>
+                </div>
+                <div class="itin-content">
+                    <span class="itin-tag tag-paros">Paros</span>
+                    <span class="itin-tag tag-milos">Milos</span>
+                    <h3>Ferry to Milos</h3>
+                    <p>6:10 PM ferry from Paros to Milos. Settle into accommodation.</p>
+                </div>
+            </div>
+
+            <div class="itinerary-item">
+                <div class="itin-date">
+                    <div class="day-num">7</div>
+                    <div class="day-name">Sat</div>
+                </div>
+                <div class="itin-content">
+                    <span class="itin-tag tag-milos">Milos</span>
+                    <h3>Kleftiko Caves Boat Day</h3>
+                    <p>Full day on the water exploring Milos and its coastline.</p>
+                </div>
+            </div>
+
+            <div class="itinerary-item">
+                <div class="itin-date">
+                    <div class="day-num">8</div>
+                    <div class="day-name">Sun</div>
+                </div>
+                <div class="itin-content">
+                    <span class="itin-tag tag-milos">Milos</span>
+                    <h3>Explore Milos</h3>
+                    <p>Beaches, towns, and sunset views.</p>
+                </div>
+            </div>
+
+            <div class="itinerary-item">
+                <div class="itin-date">
+                    <div class="day-num">9</div>
+                    <div class="day-name">Mon</div>
+                </div>
+                <div class="itin-content">
+                    <span class="itin-tag tag-milos">Milos</span>
+                    <span class="itin-tag tag-athens">Athens</span>
+                    <h3>Milos &rarr; Athens</h3>
+                    <p>Morning at the beach. 2:30 PM flight to Athens for one last night.</p>
+                </div>
+            </div>
+
+            <div class="itinerary-item">
+                <div class="itin-date">
+                    <div class="day-num">10</div>
+                    <div class="day-name">Tue</div>
+                </div>
+                <div class="itin-content">
+                    <span class="itin-tag tag-travel">Travel</span>
+                    <h3>Fly Home</h3>
+                    <p>Depart Athens 10:25 AM. Land Newark 2:05 PM.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accommodations Tab -->
+    <div id="accommodations" class="tab-content">
+        <div class="tab-inner">
+            <h2>Where We're Staying</h2>
+            <p class="section-subtitle">Private villas and island stays across three destinations.</p>
+
+            <p style="font-family: 'Inter', sans-serif; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #8a8580; margin-bottom: 12px; margin-top: 8px;">Marena Estate &mdash; Naoussa, Paros</p>
+            <div class="villa-gallery">
+                <div class="gallery-hero">
+                    <img src="https://oliverentals.com/wp-content/uploads/2026/01/Marena-Estate-in-Paros-by-Olive-rentals54-1024x575.jpg" alt="Marena Estate - Aerial View">
+                </div>
+                <img src="https://oliverentals.com/wp-content/uploads/2026/01/MARENA-COMPLEX-FEATURED-1.jpg" alt="Marena Estate - Featured">
+                <img src="https://oliverentals.com/wp-content/uploads/2026/01/Marena-Estate-in-Paros-by-Olive-rentals01-1024x683.jpg" alt="Marena Estate - Pool">
+                <img src="https://oliverentals.com/wp-content/uploads/2026/01/Marena-Estate-in-Paros-by-Olive-rentals03-1024x683.jpg" alt="Marena Estate - Exterior">
+                <img src="https://oliverentals.com/wp-content/uploads/2026/01/Marena-Estate-in-Paros-by-Olive-rentals05-1024x683.jpg" alt="Marena Estate - Terrace View">
+                <img src="https://oliverentals.com/wp-content/uploads/2026/01/Marena-Estate-in-Paros-by-Olive-rentals55-1024x575.jpg" alt="Marena Estate - Aerial Pool">
+                <img src="https://oliverentals.com/wp-content/uploads/2026/01/Marena-Estate-in-Paros-by-Olive-rentals20-1024x683.jpg" alt="Marena Estate - Outdoor Dining">
+                <img src="https://oliverentals.com/wp-content/uploads/2026/01/Marena-Estate-in-Paros-by-Olive-rentals22-1024x683.jpg" alt="Marena Estate - Lounge">
+                <img src="https://oliverentals.com/wp-content/uploads/2026/01/Marena-Estate-in-Paros-by-Olive-rentals25-1024x683.jpg" alt="Marena Estate - Garden">
+            </div>
+
+            <div class="accom-grid">
+                <div class="accom-card">
+                    <h3>Marena Estate</h3>
+                    <div class="location">Naoussa, Paros</div>
+                    <div class="detail">4 nights (June 2&ndash;6)</div>
+                    <div class="detail">Private villa complex</div>
+                    <div class="detail">$580 per person</div>
+                    <span class="status-confirmed">Confirmed</span>
+                </div>
+                <div class="accom-card">
+                    <h3>Milos Stay</h3>
+                    <div class="location">Adamas / Plaka, Milos</div>
+                    <div class="detail">3 nights (June 6&ndash;9)</div>
+                    <div class="detail">$200 per person</div>
+                    <span class="status-tbd">Not Yet Booked</span>
+                </div>
+                <div class="accom-card">
+                    <h3>Athens Hotel</h3>
+                    <div class="location">Plaka, Athens</div>
+                    <div class="detail">1 night (June 9&ndash;10)</div>
+                    <div class="detail">$50 per person</div>
+                    <span class="status-tbd">TBD</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Flights Tab -->
+    <div id="flights" class="tab-content">
+        <div class="tab-inner">
+            <h2>Flight Info</h2>
+            <p class="section-subtitle">Most of the group is on the same United flights. Everyone books their own international tickets.</p>
+
+            <div class="flight-card">
+                <div class="flight-label">Outbound &middot; June 1</div>
+                <div class="flight-route">
+                    <div class="flight-city">
+                        <div class="code">EWR</div>
+                        <div class="time">3:50 PM</div>
+                        <div class="date">Sun, June 1</div>
+                    </div>
+                    <div class="flight-arrow">&rarr;</div>
+                    <div class="flight-city">
+                        <div class="code">ATH</div>
+                        <div class="time">8:10 AM</div>
+                        <div class="date">Mon, June 2</div>
+                    </div>
+                </div>
+                <div class="flight-airline">United Airlines &middot; Nonstop</div>
+            </div>
+
+            <div class="flight-card">
+                <div class="flight-label">Return &middot; June 10</div>
+                <div class="flight-route">
+                    <div class="flight-city">
+                        <div class="code">ATH</div>
+                        <div class="time">10:25 AM</div>
+                        <div class="date">Tue, June 10</div>
+                    </div>
+                    <div class="flight-arrow">&rarr;</div>
+                    <div class="flight-city">
+                        <div class="code">EWR</div>
+                        <div class="time">2:05 PM</div>
+                        <div class="date">Tue, June 10</div>
+                    </div>
+                </div>
+                <div class="flight-airline">United Airlines &middot; Nonstop</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Costs Tab -->
+    <div id="costs" class="tab-content">
+        <div class="tab-inner">
+            <h2>Cost Breakdown</h2>
+            <p class="section-subtitle">Estimated per-person costs. International flights booked individually; everything else is split equally.</p>
+
+            <table class="cost-table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th class="amount">Per Person</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="category-header"><td colspan="2">Flights</td></tr>
+                    <tr>
+                        <td class="item-name">Newark &rarr; Athens (book individually)</td>
+                        <td class="amount">$550</td>
+                    </tr>
+                    <tr>
+                        <td class="item-name">Athens &rarr; Newark (book individually)</td>
+                        <td class="amount">$550</td>
+                    </tr>
+                    <tr>
+                        <td class="item-name">Milos &rarr; Athens (domestic)</td>
+                        <td class="amount">$155</td>
+                    </tr>
+
+                    <tr class="category-header"><td colspan="2">Ferries</td></tr>
+                    <tr>
+                        <td class="item-name">Athens &rarr; Paros</td>
+                        <td class="amount">$80</td>
+                    </tr>
+                    <tr>
+                        <td class="item-name">Paros &rarr; Milos</td>
+                        <td class="amount">$70</td>
+                    </tr>
+                    <tr>
+                        <td class="item-name">Antiparos round-trip</td>
+                        <td class="amount">$10</td>
+                    </tr>
+
+                    <tr class="category-header"><td colspan="2">Accommodations</td></tr>
+                    <tr>
+                        <td class="item-name">Paros &mdash; Marena Estate (4 nights)</td>
+                        <td class="amount">$580</td>
+                    </tr>
+                    <tr>
+                        <td class="item-name">Milos (3 nights)</td>
+                        <td class="amount">$200</td>
+                    </tr>
+                    <tr>
+                        <td class="item-name">Athens (1 night)</td>
+                        <td class="amount">$50</td>
+                    </tr>
+
+                    <tr class="category-header"><td colspan="2">Transportation</td></tr>
+                    <tr>
+                        <td class="item-name">ATV rentals (3 days total)</td>
+                        <td class="amount">$105</td>
+                    </tr>
+                    <tr>
+                        <td class="item-name">Airport taxi / metro</td>
+                        <td class="amount">$10</td>
+                    </tr>
+
+                    <tr class="category-header"><td colspan="2">Activities</td></tr>
+                    <tr>
+                        <td class="item-name">Boat tour</td>
+                        <td class="amount">$110</td>
+                    </tr>
+                    <tr>
+                        <td class="item-name">Beach club</td>
+                        <td class="amount">$30</td>
+                    </tr>
+                    <tr>
+                        <td class="item-name">Acropolis</td>
+                        <td class="amount">$35</td>
+                    </tr>
+
+                    <tr class="category-header"><td colspan="2">Food &amp; Drinks (Estimates)</td></tr>
+                    <tr>
+                        <td class="item-name">Breakfast (9 days)</td>
+                        <td class="amount">$90</td>
+                    </tr>
+                    <tr>
+                        <td class="item-name">Lunch (9 days)</td>
+                        <td class="amount">$180</td>
+                    </tr>
+                    <tr>
+                        <td class="item-name">Dinner (9 days)</td>
+                        <td class="amount">$360</td>
+                    </tr>
+                    <tr>
+                        <td class="item-name">Drinks / coffee / snacks</td>
+                        <td class="amount">$135</td>
+                    </tr>
+
+                    <tr class="total-row">
+                        <td>Estimated Total</td>
+                        <td class="amount">~$3,300</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p class="cost-note">* International flights (~$1,100) are booked and paid individually. All other shared costs are split equally among the group. Food &amp; drink estimates are approximate &mdash; actual costs will be tracked via Splitwise during the trip.</p>
+        </div>
+    </div>
+
+    <!-- Payment Tab -->
+    <div id="payment" class="tab-content">
+        <div class="tab-inner">
+            <h2>Payment Info</h2>
+            <p class="section-subtitle">How and when to pay for the trip.</p>
+
+            <div class="payment-methods">
+                <div class="payment-card">
+                    <h3>Before the Trip</h3>
+                    <p>Accommodation deposits and balances, ferry bookings, and activity reservations are collected upfront. Pay via:</p>
+                    <p style="margin-top: 8px; margin-bottom: 4px;"><strong>Venmo:</strong> @ella-sklar</p>
+                    <p style="margin-bottom: 0;"><strong>Zelle:</strong> 713-851-3207</p>
+                </div>
+                <div class="payment-card">
+                    <h3>During the Trip</h3>
+                    <p>Shared expenses like meals, groceries, ubers, and spontaneous activities will be tracked on <strong>Splitwise</strong> and settled up at the end of the trip.</p>
+                </div>
+                <div class="payment-card">
+                    <h3>Flights</h3>
+                    <p>Everyone books and pays for their own international flights (Newark &harr; Athens). Domestic flights and ferries are handled as a group.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Tab -->
+    <div id="faq" class="tab-content">
+        <div class="tab-inner">
+            <h2>Need to Know</h2>
+            <p class="section-subtitle">Essential info for the trip.</p>
+
+            <div class="faq-item">
+                <h3>What do I need to travel?</h3>
+                <p>A valid US passport (must not expire before December 2026). US citizens do not need a visa for Greece for stays under 90 days. You may want to register with <a href="https://travel.state.gov/content/travel/en/international-travel/before-you-go/step.html" target="_blank">STEP</a> (Smart Traveler Enrollment Program).</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What should I pack?</h3>
+                <ul>
+                    <li>Swimsuits (multiple)</li>
+                    <li>Sunscreen &amp; sunglasses</li>
+                    <li>Comfortable walking shoes &amp; sandals</li>
+                    <li>Light layers for evenings</li>
+                    <li>Going-out outfits for dinners</li>
+                    <li>Portable charger</li>
+                    <li>Euros (some places are cash-only)</li>
+                    <li>Travel adapter (Type C/F for Greece)</li>
+                </ul>
+            </div>
+
+            <div class="faq-item">
+                <h3>Villa Rules (Paros)</h3>
+                <p>The Marena Estate has standard villa rules that everyone will sign off on. Key highlights:</p>
+                <ul>
+                    <li>No parties or gatherings beyond our group</li>
+                    <li>Pool is unguarded &mdash; swim at your own risk</li>
+                    <li>No unregistered guests</li>
+                    <li>Respect quiet hours and neighbors</li>
+                    <li>Security deposit of &euro;1,400 is refunded if no damages</li>
+                </ul>
+            </div>
+
+            <div class="faq-item">
+                <h3>What about phone service?</h3>
+                <p>Check with your carrier about international plans. Most carriers offer daily international passes ($10/day for T-Mobile, AT&T, etc.). Alternatively, pick up a local SIM or eSIM when you arrive. WiFi is available at all accommodations.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Questions?</h3>
+                <p>Reach out to Ella Sklar (trip organizer) directly if you have any questions about payments, logistics, or anything else.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        Greece Grad Trip 2026 &middot; Athens &middot; Paros &middot; Milos
+    </footer>
+
+    <script>
+        function showTab(tabId) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            // Remove active from all buttons
+            document.querySelectorAll('.tab-nav button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            // Show selected tab
+            document.getElementById(tabId).classList.add('active');
+            // Set active button
+            event.currentTarget.classList.add('active');
+            // Scroll to top of content
+            window.scrollTo({ top: document.querySelector('.tab-nav').offsetTop, behavior: 'smooth' });
+        }
+    </script>
+
+</body>
+</html>
