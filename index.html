@@ -231,6 +231,42 @@
         .tag-paros { background: #e8ede8; color: #5a6e5a; }
         .tag-milos { background: #eae7ef; color: #6e5f7a; }
         .tag-athens { background: #f0e8e6; color: #7a5f5a; }
+        .tag-birthday { background: linear-gradient(135deg, #fce4ec, #fff3e0); color: #c2185b; border: 1px solid #f8bbd0; }
+
+        .birthday-item {
+            background: linear-gradient(135deg, #fffdf7 0%, #fff8f0 100%);
+            border: 1px solid #f0e0d0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: -4px -8px;
+        }
+
+        /* Confetti */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            overflow: hidden;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            top: -20px;
+            opacity: 0;
+            animation: confetti-fall 3.5s ease-in forwards;
+        }
+
+        @keyframes confetti-fall {
+            0% { opacity: 1; top: -20px; transform: rotate(0deg) translateX(0); }
+            25% { opacity: 1; transform: rotate(180deg) translateX(30px); }
+            50% { opacity: 1; transform: rotate(360deg) translateX(-20px); }
+            75% { opacity: 0.8; transform: rotate(540deg) translateX(25px); }
+            100% { opacity: 0; top: 105vh; transform: rotate(720deg) translateX(-15px); }
+        }
 
         /* Villa Gallery */
         .villa-gallery {
@@ -624,15 +660,16 @@
                 </div>
             </div>
 
-            <div class="itinerary-item">
+            <div class="itinerary-item birthday-item">
                 <div class="itin-date">
                     <div class="day-num">5</div>
                     <div class="day-name">Thu</div>
                 </div>
                 <div class="itin-content">
                     <span class="itin-tag tag-paros">Paros</span>
-                    <h3>Soros Beach Club, Antiparos</h3>
-                    <p>Ferry to Antiparos for a day at Soros Beach Club.</p>
+                    <span class="itin-tag tag-birthday">Pepper's Birthday</span>
+                    <h3>Soros Beach Club, Antiparos 🎂</h3>
+                    <p>Happy birthday Pepper! Ferry to Antiparos to celebrate at Soros Beach Club.</p>
                 </div>
             </div>
 
@@ -996,6 +1033,33 @@
     </footer>
 
     <script>
+        function launchConfetti() {
+            const container = document.createElement('div');
+            container.className = 'confetti-container';
+            document.body.appendChild(container);
+
+            const colors = ['#c2185b', '#f8bbd0', '#ffcc80', '#ce93d8', '#80cbc4', '#ef9a9a', '#fff59d', '#a5d6a7'];
+            const shapes = ['circle', 'square'];
+
+            for (let i = 0; i < 80; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti-piece';
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const size = Math.random() * 8 + 5;
+                const shape = shapes[Math.floor(Math.random() * shapes.length)];
+                piece.style.left = Math.random() * 100 + '%';
+                piece.style.width = size + 'px';
+                piece.style.height = size + 'px';
+                piece.style.background = color;
+                piece.style.borderRadius = shape === 'circle' ? '50%' : '2px';
+                piece.style.animationDelay = Math.random() * 1.5 + 's';
+                piece.style.animationDuration = (Math.random() * 2 + 2.5) + 's';
+                container.appendChild(piece);
+            }
+
+            setTimeout(() => container.remove(), 5000);
+        }
+
         function showTab(tabId) {
             // Hide all tabs
             document.querySelectorAll('.tab-content').forEach(tab => {
@@ -1011,6 +1075,10 @@
             event.currentTarget.classList.add('active');
             // Scroll to top of content
             window.scrollTo({ top: document.querySelector('.tab-nav').offsetTop, behavior: 'smooth' });
+            // Launch confetti on itinerary tab
+            if (tabId === 'itinerary') {
+                launchConfetti();
+            }
         }
     </script>
 
